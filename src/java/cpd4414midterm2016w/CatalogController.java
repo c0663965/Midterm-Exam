@@ -15,15 +15,30 @@
  */
 package cpd4414midterm2016w;
 
+import static cpd4414midterm2016w.Utils.getConnection;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.ManagedBean;
+import javax.faces.bean.ApplicationScoped;
 
 /**
  *
- * @author <ENTER YOUR NAME HERE>
+ * @author <Kihoon, Lee>
  */
+
+@ApplicationScoped
+@ManagedBean
 public class CatalogController {
     // TODO: Create a private List of Catalog objects as an instance variable
 
+    
+    private List<Catalog> catalogs = new ArrayList<>();
     /**
      * Public no-arg constructor - automatically pulls contents from database
      */
@@ -31,6 +46,32 @@ public class CatalogController {
         // TODO: Connect to the database and query the DB for all items in the
         //       Catalog table. Iterate through the results to build the List
         //       of Catalog objects and assign it to the private List instance
+        
+        try {
+            
+            String table = "catalog";
+            // Make a Connection
+            Connection conn = Utils.getConnection();
+
+            // Build a Query
+            String sql = "SELECT * FROM "+table;
+            Statement stmt = conn.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            // Parse the Results
+            while (rs.next()) {
+                Catalog temp = new Catalog( rs.getInt("id"),
+                                            rs.getString("name"),
+                                            rs.getString("description"),
+                                            rs.getInt("quantity") );
+                catalogs.add(temp);
+            }
+            
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CatalogController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -41,6 +82,12 @@ public class CatalogController {
     public Catalog getCatalogById(int id) {
         // TODO: Search through the private List of Catalog items to find a
         //       single Catalog item that has the matching ID and return it
+        for (Catalog catalog : catalogs) {
+            if (catalog.getId() == id) {
+                return catalog;
+            }
+        }
+            
         return null;
     }
 
@@ -50,6 +97,6 @@ public class CatalogController {
      */
     public List<Catalog> getAll() {
         // TODO: Return the entire List of Catalog items
-        return null;
+        return catalogs;
     }
 }

@@ -15,6 +15,8 @@
  */
 package cpd4414midterm2016w;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,11 +24,13 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author <ENTER YOUR NAME HERE>
+ * @author <Kihoon, Lee>
  */
 @WebServlet("/catalog")
 public class CatalogServlet extends HttpServlet {
     // TODO: Create an instance of the CatalogController class to use in doGet
+    
+    private CatalogController catalog = new CatalogController();
     
     /**
      * The standard Servlet doGet method which runs when a GET request is received
@@ -39,7 +43,31 @@ public class CatalogServlet extends HttpServlet {
         response.setHeader("Cache-Control", "private, no-store, no-cache, must-revalidate");
         response.setHeader("Pragma", "no-cache");
         response.setDateHeader("Expires", 0);
+        
+        try (PrintWriter out = response.getWriter()) {
+            
+            String id =request.getParameter("catalogId");
+        
+            String str="";
 
+            if(id!=null)
+                str=catalog.getCatalogById(Integer.parseInt(id)).toString();
+            else
+            {
+                str="[";
+
+                for(int i=0;i<catalog.getAll().size();i++)
+                    str+=catalog.getAll().get(i).toString()+", ";
+
+                str=str.substring(0, str.length()-2)+"]";
+            }
+            
+            out.println(str);
+
+        } catch (IOException ex) {
+            System.err.println("Something Went Wrong: " + ex.getMessage());
+        }
+        
         // TODO: Determine if there was an "id" Parameter on the Request
 
         // TODO: If there was an "id" parameter, convert it to an Integer and

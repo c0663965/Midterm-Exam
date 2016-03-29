@@ -20,8 +20,12 @@ import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
 
 /**
  *
@@ -30,6 +34,22 @@ import static org.junit.Assert.*;
 public class CatalogTest {
 
     public CatalogTest() {
+    }
+
+    @BeforeClass
+    public static void setUpClass() throws Exception {
+    }
+
+    @AfterClass
+    public static void tearDownClass() throws Exception {
+    }
+
+    @Before
+    public void setUp() throws Exception {
+    }
+
+    @After
+    public void tearDown() throws Exception {
     }
 
     @Test
@@ -61,26 +81,51 @@ public class CatalogTest {
 
     @Test
     public void testSetQuantity4ThenGetQuantityReturns4() {
-        // TODO: Complete the test according to the test name
+        
+        Catalog instance = new Catalog();
+        instance.setQuantity(4);
+        int expResult = 4;
+        int result = instance.getQuantity();
+        assertEquals(expResult, result);
     }
 
     @Test
     public void testSetIdZeroThenGetIdReturnsZero() {
         // TODO: Complete the test according to the test name
+        Catalog instance = new Catalog();
+        instance.setId(0);
+        int expResult = 0;
+        int result = instance.getId();
+        assertEquals(expResult, result);
     }
 
     @Test
     public void testSetNameEmptyThenGetNameReturnsEmpty() {
         // TODO: Complete the test according to the test name
+        Catalog instance = new Catalog();
+        instance.setName(null);
+        String expResult = null;
+        String result = instance.getName();
+        assertEquals(expResult, result);
     }
 
     @Test
     public void testSetDescEmptyThenGetDescReturnsEmpty() {
         // TODO: Complete the test according to the test name
+        Catalog instance = new Catalog();
+        instance.setDescription(null);
+        String expResult = null;
+        String result = instance.getDescription();
+        assertEquals(expResult, result);
     }
 
     @Test
     public void testSetQuantityZeroThenGetQuantityReturnsZero() {
+        Catalog instance = new Catalog();
+        instance.setQuantity(0);
+        int expResult = 0;
+        int result = instance.getQuantity();
+        assertEquals(expResult, result);
         // TODO: Complete the test according to the test name
     }
     
@@ -95,7 +140,11 @@ public class CatalogTest {
     
     @Test
     public void testSetQuantityNegative4ThenGetQuantityReturnsZero() {
-        // TODO: Complete the test according to the test name
+        Catalog instance = new Catalog();
+        instance.setQuantity(-100);
+        int expResult = 0;
+        int result = instance.getQuantity();
+        assertEquals(expResult, result);
     }
 
     @Test
@@ -119,6 +168,119 @@ public class CatalogTest {
             Logger.getLogger(CatalogTest.class.getName()).log(Level.SEVERE, null, ex);
             fail("Error Parsing JSON: " + strJSON);
         }
+    }
+
+    /**
+     * Test of getId method, of class Catalog.
+     */
+    @Test
+    public void testGetId() {
+        System.out.println("getId");
+        Catalog instance = null;
+        int expResult = 0;
+        int result = instance.getId();
+        assertEquals(expResult, result);
+        
+    }
+
+    /**
+     * Test of setId method, of class Catalog.
+     */
+    @Test
+    public void testSetId() {
+        System.out.println("setId");
+        int id = 0;
+        Catalog instance = null;
+        instance.setId(id);
+        
+    }
+
+    /**
+     * Test of getName method, of class Catalog.
+     */
+    @Test
+    public void testGetName() {
+        System.out.println("getName");
+        Catalog instance = null;
+        String expResult = "";
+        String result = instance.getName();
+        assertEquals(expResult, result);
+        
+    }
+
+    /**
+     * Test of setName method, of class Catalog.
+     */
+    @Test
+    public void testSetName() {
+        System.out.println("setName");
+        String name = "";
+        Catalog instance = null;
+        instance.setName(name);
+        
+    }
+
+    /**
+     * Test of getDescription method, of class Catalog.
+     */
+    @Test
+    public void testGetDescription() {
+        System.out.println("getDescription");
+        Catalog instance = null;
+        String expResult = "";
+        String result = instance.getDescription();
+        assertEquals(expResult, result);
+        
+    }
+
+    /**
+     * Test of setDescription method, of class Catalog.
+     */
+    @Test
+    public void testSetDescription() {
+        System.out.println("setDescription");
+        String description = "";
+        Catalog instance = null;
+        instance.setDescription(description);
+        
+    }
+
+    /**
+     * Test of getQuantity method, of class Catalog.
+     */
+    @Test
+    public void testGetQuantity() {
+        System.out.println("getQuantity");
+        Catalog instance = null;
+        int expResult = 0;
+        int result = instance.getQuantity();
+        assertEquals(expResult, result);
+        
+    }
+
+    /**
+     * Test of setQuantity method, of class Catalog.
+     */
+    @Test
+    public void testSetQuantity() {
+        System.out.println("setQuantity");
+        int quantity = 0;
+        Catalog instance = null;
+        instance.setQuantity(quantity);
+        
+    }
+
+    /**
+     * Test of toString method, of class Catalog.
+     */
+    @Test
+    public void testToString() {
+        System.out.println("toString");
+        Catalog instance = null;
+        String expResult = "";
+        String result = instance.toString();
+        assertEquals(expResult, result);
+       
     }
 
 }
